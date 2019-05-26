@@ -3,6 +3,11 @@ import {AppState} from "./AppState";
 import {Message} from "hl7parser";
 import {HL7Service, IObxValue} from "../../services/HL7Service";
 
+// This was a fully working TS Mithril Component.
+
+// I am using AppState as the state example. This is not usually needed in TS component
+// You can easily just supply <any> in place.
+
 export class ExampleCompo implements m.ClassComponent<AppState> {
 
     private labsMessage?: Message;
@@ -15,6 +20,8 @@ export class ExampleCompo implements m.ClassComponent<AppState> {
     }
 
     oninit = (n: m.Vnode<AppState, any>) => {
+        // This is a dmonstration that you can add a state object to the Vnode. 
+        // Almost never needed to do it. 
         n.state = this.appState;
         Promise.all([
             this.fetchLabTemplate(), this.fetchVitalsTemplate()])
@@ -82,6 +89,9 @@ export class ExampleCompo implements m.ClassComponent<AppState> {
                             id: section + i.code,
                             onchange: this.onValueChange,
                             oncreate: (v: m.VnodeDOM<any, any>) => {
+                                // Demonstrating what happens when oncreate() is added to a node like this.
+                                // You will see for example attrs.style with "withd:40px" in here.
+                                // and v.dom will point to this input HTML element (HTMLInputElement class). 
                                 debugger;
                             },
                             style: "width:40px;",
@@ -123,7 +133,14 @@ export class ExampleCompo implements m.ClassComponent<AppState> {
         return m("", "No Data");
     };
 
+    //
+    // HTTP GET Example.
+    // If you want POST, set opt.mthod = "POST" and
+    // opt.data with any data object you have. It will stringify as JSON.
+    //
     private fetchLabTemplate = () => {
+        // If you know the return data type you can use <YourClass> instead of <any> and "res:" when
+        // you get the data back will be of that type.
         let opt = {} as m.RequestOptions<any>;
         let url = "/api/labs";
         m.request(url, opt).then(
@@ -131,6 +148,7 @@ export class ExampleCompo implements m.ClassComponent<AppState> {
                 this.labsMessage = HL7Service.parse(res.hl7);
                 this.labs = HL7Service.getObxNumberResults(this.labsMessage);
                 console.debug(`${this.labs.toString()}`);
+                // If you do return res; here then it will return the Promise of the data.
             })
             .catch((err)=>{
                 console.error(`${err}`);
