@@ -1,13 +1,13 @@
+// I am using modules and webpack so there are import keywords here.
 import m = require("mithril");
 import {AppState} from "./AppState";
 import {Message} from "hl7parser";
 import {HL7Service, IObxValue} from "../../services/HL7Service";
 
-// This was a fully working TS Mithril Component.
-
 // I am using AppState as the state example. This is not usually needed in TS component
 // You can easily just supply <any> in place.
 
+// I am using modules and webpack so there is the export keyword here.
 export class ExampleCompo implements m.ClassComponent<AppState> {
 
     private labsMessage?: Message;
@@ -16,7 +16,6 @@ export class ExampleCompo implements m.ClassComponent<AppState> {
     private vitals?: IObxValue[];
 
     constructor(private appState: AppState) {
-        console.log(`ObxCompo Initialized with ${appState.patients.length} patients`);
     }
 
     oninit = (n: m.Vnode<AppState, any>) => {
