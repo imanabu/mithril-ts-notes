@@ -1,2 +1,9 @@
 # mithril-ts-notes
-Various Notes and Such to Work with Mithril.js and Typescript
+
+Various Notes and Such to Work with Mithril.js and Typescript effectively.
+
+Mostly Wiki articles I have taken notes of.
+
+[Goto = wiki("Home"){}](https://github.com/imanabu/mithril-ts-notes/wiki)
+
+
