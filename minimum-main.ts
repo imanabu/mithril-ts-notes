@@ -4,7 +4,7 @@ export class Main implements m.ClassComponent {
 
     constructor() {}
     public view() {
-        return m("H2", `Hello! ${this.appState.status}`);
+        return m("H2", `Hello!`);
     }
 
 }
@@ -15,5 +15,5 @@ const content = document.getElementById("content") as Element;
 
 m.route(content, "/",
     {
-        "/": new Main(appState),
+        "/": new Main(),
     });
